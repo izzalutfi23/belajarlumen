@@ -1,5 +1,6 @@
 <?php
 
+// use App\Http\Controllers\Postcontroller;
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -16,3 +17,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+// $router->get('/posts', [Postcontroller::class, 'index']);
+$router->get('/posts', 'Postcontroller@index');

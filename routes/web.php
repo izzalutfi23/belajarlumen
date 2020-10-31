@@ -21,3 +21,4 @@ $router->get('/', function () use ($router) {
 
 // $router->get('/posts', [Postcontroller::class, 'index']);
 $router->get('/posts', 'Postcontroller@index');
+$router->post('/posts', 'Postcontroller@store');

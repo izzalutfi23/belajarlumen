@@ -53,4 +53,21 @@ class Postcontroller extends Controller{
 
     }
 
+    public function show($id){
+        $post = Post::find($id); 
+        if($post){
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post',
+                'data' => $post
+            ]);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan'
+            ]);
+        }
+    }
+
 }

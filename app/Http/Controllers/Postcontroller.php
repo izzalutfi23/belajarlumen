@@ -18,7 +18,6 @@ class Postcontroller extends Controller{
     }
 
     public function store(Request $request){
-
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'content' => 'required'
@@ -50,7 +49,6 @@ class Postcontroller extends Controller{
                 ], 400);
             }
         }
-
     }
 
     public function show($id){
@@ -60,18 +58,17 @@ class Postcontroller extends Controller{
                 'success' => true,
                 'message' => 'Detail Post',
                 'data' => $post
-            ]);
+            ], 200);
         }
         else{
             return response()->json([
                 'success' => false,
                 'message' => 'Data tidak ditemukan'
-            ]);
+            ], 404);
         }
     }
 
     public function update(Request $request, $id){
-        
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'content' => 'required'
@@ -104,7 +101,22 @@ class Postcontroller extends Controller{
                 ], 400);
             }
         }
+    }
 
+    public function destroy($id){
+        $post = Post::destroy('id', $id);
+        if($post){
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil dihapus'
+            ], 200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Data gagal dihapus'
+            ], 400);
+        }
     }
 
 }

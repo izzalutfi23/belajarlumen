@@ -23,3 +23,5 @@ $router->get('/', function () use ($router) {
 $router->get('/posts', 'Postcontroller@index');
 $router->post('/posts', 'Postcontroller@store');
 $router->get('/posts/{id}', 'Postcontroller@show');
+$router->put('/posts/{id}', 'Postcontroller@update');
+$router->delete('/posts/{id}', 'Postcontroller@destroy');

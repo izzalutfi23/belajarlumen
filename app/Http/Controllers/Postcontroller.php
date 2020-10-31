@@ -70,4 +70,41 @@ class Postcontroller extends Controller{
         }
     }
 
+    public function update(Request $request, $id){
+        
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'message' => 'Harap cek kembali inputan anda!',
+                'data' => $validator->errors()
+            ]);
+        }
+        else{
+            $post = Post::whereId($id)->update([
+                'title' => $request->title,
+                'content' => $request->content
+            ]);
+            
+            if($post){
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Data berhasil diubah',
+                    'data' => $post
+                ], 201);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data gagal diubah!'
+                ], 400);
+            }
+        }
+
+    }
+
 }
